@@ -11,8 +11,12 @@ class SwitchGame extends FlameGame{
     await super.onLoad();
   bed=Bed();
   add(bed);
-    Timer(const Duration(seconds: 5), () {
-      bed.switchToNight();
-    }); 
+    startDayNightCycle();
+  }
+
+  void startDayNightCycle() {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      bed.toggleDayNight(); // Toggle between day and night every 5 seconds
+    });
   }
 }

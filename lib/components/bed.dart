@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 import 'package:switch_off/game.dart';
 
 class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
-  
+  bool isNight = false; 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -16,6 +16,22 @@ class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
   void switchToNight() async {
     final nightSprite = await Sprite.load('bed_night.png');
     sprite = nightSprite;
+    isNight=true;
   
+  }
+
+    void switchToDay() async {
+    final daySprite = await Sprite.load('bed_day.png');
+    sprite = daySprite;
+    isNight = false;
+  
+  }
+
+    void toggleDayNight() {
+    if (isNight) {
+      switchToDay();
+    } else {
+      switchToNight();
+    }
   }
 }

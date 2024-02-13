@@ -63,8 +63,10 @@ flutter:
   assets:
     - assets\images\bed_day.png
     - assets\images\bed_night.png
-    # - assets\images\background_day.png
-    # - assets\images\background_night.png
+    - assets\images\background_day.png
+    - assets\images\background_night.png
+    - assets\images\screen_day.png
+    - assets\images\borderline_night.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

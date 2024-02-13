@@ -8,8 +8,8 @@ class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
     await super.onLoad();
     // Load the image for the Angry Bird sprite
     sprite = await Sprite.load('bed_day.png'); // Adjust the path to your image
-    size = Vector2(300, 300); // Adjust size as needed
-    position = Vector2(200,400); 
+    size = Vector2(1200, 600); // Adjust size as needed
+    position = Vector2(465,280); 
     anchor=Anchor.center;
   }
 

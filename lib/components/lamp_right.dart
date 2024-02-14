@@ -1,32 +1,31 @@
 import 'package:flame/components.dart';
 import 'package:switch_off/game.dart';
 
-class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
+class Lamp2 extends SpriteComponent with HasGameRef<SwitchGame>{
   bool isNight = false; 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
     // Load the image for the Angry Bird sprite
-    sprite = await Sprite.load('bed_day.png'); // Adjust the path to your image
-    size = Vector2(1200, 750); // Adjust size as needed
-    position = Vector2(420,360); 
+    sprite = await Sprite.load('lamp_right.png'); // Adjust the path to your image
+    size = Vector2(800, 600); // Adjust size as needed
+    position = Vector2(540,320); 
     anchor=Anchor.center;
   }
 
-
   void switchToNight() async {
-    final nightSprite = await Sprite.load('bed_night.png');
+    final nightSprite = await Sprite.load('lamp_right_night.png');
     sprite = nightSprite;
     isNight=true;
+  
   }
-
 
     void switchToDay() async {
-    final daySprite = await Sprite.load('bed_day.png');
+    final daySprite = await Sprite.load('lamp_right.png');
     sprite = daySprite;
     isNight = false;
+  
   }
-
 
     void toggleDayNight() {
     if (isNight) {
@@ -35,6 +34,5 @@ class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
       switchToNight();
     }
   }
-
-
 }
+

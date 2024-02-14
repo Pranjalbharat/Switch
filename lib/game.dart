@@ -28,7 +28,6 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
   Future<void> onLoad() async {
     await super.onLoad();
 
-
     background = Background();
     add(background);
     screen = Screen();
@@ -47,9 +46,7 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
     ball = Ball();
     add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
 
- 
     startDayNightCycle();
-
   }
 
   void startDayNightCycle() {
@@ -58,11 +55,8 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
       background.toggleDayNight();
       door.toggleDayNight();
 
- 
-
       bulb.toggleDayNight();
-     // Toggle between day and night every 5 seconds
-
+      // Toggle between day and night every 5 seconds
     });
   }
 

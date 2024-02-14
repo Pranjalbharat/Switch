@@ -75,6 +75,11 @@ flutter:
     - assets\images\lamp_left.png
     - assets\images\lamp_right_night.png
     - assets\images\lamp_right.png
+    - assets\images\window_left_night.png
+    - assets\images\window_left.png
+    - assets\images\window_right_night.png
+    - assets\images\window_right.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -7,7 +7,9 @@ import 'package:switch_off/components/bed.dart';
 import 'package:switch_off/components/borderline.dart';
 
 import 'package:switch_off/components/door.dart';
+import 'package:switch_off/components/lamp_right.dart';
 import 'package:switch_off/components/screen.dart';
+import 'package:switch_off/components/lamp_left.dart';
 
 
 class SwitchGame extends FlameGame{
@@ -16,6 +18,8 @@ class SwitchGame extends FlameGame{
   late Screen screen;
   late BorderLine borderline;
   late Door door;
+  late Lamp lamp;
+  late Lamp2 lamp2;
 
   
     @override
@@ -33,6 +37,10 @@ add(door);
 
     bed=Bed();
   add(bed);
+  lamp=Lamp();
+  add(lamp);
+  lamp2=Lamp2();
+  add(lamp2);
  
     startDayNightCycle();
   }
@@ -42,6 +50,8 @@ add(door);
       bed.toggleDayNight();
       background.toggleDayNight(); 
       door.toggleDayNight();
+      lamp.toggleDayNight();
+      lamp2.toggleDayNight();
      // Toggle between day and night every 5 seconds
     });
   }

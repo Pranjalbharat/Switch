@@ -69,7 +69,7 @@ flutter:
     - assets\images\borderline_night.png
     - assets\images\door_night.png
     - assets\images\door_day.png
-    - assets\images\blub_day.png
+    - assets\images\bulb_day.png
     - assets\images\bulb_night.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

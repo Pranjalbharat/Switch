@@ -8,24 +8,25 @@ class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
     await super.onLoad();
     // Load the image for the Angry Bird sprite
     sprite = await Sprite.load('bed_day.png'); // Adjust the path to your image
-    size = Vector2(1200, 600); // Adjust size as needed
-    position = Vector2(465,280); 
+    size = Vector2(1100, 500); // Adjust size as needed
+    position = Vector2(495,290); 
     anchor=Anchor.center;
   }
+
 
   void switchToNight() async {
     final nightSprite = await Sprite.load('bed_night.png');
     sprite = nightSprite;
     isNight=true;
-  
   }
+
 
     void switchToDay() async {
     final daySprite = await Sprite.load('bed_day.png');
     sprite = daySprite;
     isNight = false;
-  
   }
+
 
     void toggleDayNight() {
     if (isNight) {
@@ -34,4 +35,6 @@ class Bed extends SpriteComponent with HasGameRef<SwitchGame>{
       switchToNight();
     }
   }
+
+
 }

@@ -8,6 +8,7 @@ import 'package:switch_off/Ball/ball.dart';
 import 'package:switch_off/components/background.dart';
 import 'package:switch_off/components/bed.dart';
 import 'package:switch_off/components/borderline.dart';
+import 'package:switch_off/components/bulb.dart';
 
 import 'package:switch_off/components/door.dart';
 import 'package:switch_off/components/screen.dart';
@@ -18,6 +19,7 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
   late Screen screen;
   late BorderLine borderline;
   late Door door;
+  late Bulb bulb;
 
   //ball
   late Ball ball;
@@ -25,6 +27,7 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
 
     background = Background();
     add(background);
@@ -43,6 +46,10 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
     // add ball
     ball = Ball();
     add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
+
+ 
+    startDayNightCycle();
+
   }
 
   void startDayNightCycle() {
@@ -50,7 +57,12 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
       bed.toggleDayNight();
       background.toggleDayNight();
       door.toggleDayNight();
-      // Toggle between day and night every 5 seconds
+
+ 
+
+      bulb.toggleDayNight();
+     // Toggle between day and night every 5 seconds
+
     });
   }
 

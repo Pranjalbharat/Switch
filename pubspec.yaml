@@ -61,26 +61,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets\images\bed_day.png
-    - assets\images\bed_night.png
-    - assets\images\background_day.png
-    - assets\images\background_night.png
-    - assets\images\screen_day.png
-    - assets\images\borderline_night.png
-    - assets\images\door_night.png
-    - assets\images\door_day.png
-    - assets\images\blub_day.png
-    - assets\images\bulb_night.png
-    - assets\images\lamp_left_night.png
-    - assets\images\lamp_left.png
-    - assets\images\lamp_right_night.png
-    - assets\images\lamp_right.png
-    - assets\images\window_left_night.png
-    - assets\images\window_left.png
-    - assets\images\window_right_night.png
-    - assets\images\window_right.png
 
-
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

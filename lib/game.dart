@@ -25,10 +25,13 @@ class SwitchGame extends FlameGame{
   late Lamp2 lamp2;
   late WindowL windowl;
   late WindowR windowr;
+  late double width=size.x;
+  late double height=width/1.44;
 
   
     @override
   Future<void> onLoad() async {
+    
     await super.onLoad();
    
   background=Background();

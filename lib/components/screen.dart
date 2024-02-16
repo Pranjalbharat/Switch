@@ -9,8 +9,8 @@ class Screen extends SpriteComponent with HasGameRef<SwitchGame>{
     sprite = await Sprite.load('screen_day.png'); // Adjust the path to your image
     // size = Vector2(300, 300); // Adjust size as needed
     // position = Vector2(200,400); 
-    size = gameRef.size; 
+    size = Vector2(game.size.x,game.size.x/1.44);
     anchor=Anchor.center;
-    position = gameRef.size / 2;
+    position = gameRef.size/2 ;
   }
 }

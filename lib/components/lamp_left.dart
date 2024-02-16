@@ -9,7 +9,7 @@ class Lamp extends SpriteComponent with HasGameRef<SwitchGame>{
     // Load the image for the Angry Bird sprite
     sprite = await Sprite.load('lamp_left.png'); // Adjust the path to your image
     size = Vector2(800, 600); // Adjust size as needed
-    position = Vector2(450,320); 
+    position = Vector2(game.width*0.21,game.height*0.18); 
     anchor=Anchor.center;
   }
 

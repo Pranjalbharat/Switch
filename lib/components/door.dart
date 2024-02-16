@@ -8,9 +8,10 @@ class Door extends SpriteComponent with HasGameRef<SwitchGame>{
     await super.onLoad();
     // Load the image for the Angry Bird sprite
     sprite = await Sprite.load('door_day.png'); // Adjust the path to your image
-    size = Vector2(1200, 700); // Adjust size as needed
-    position = Vector2(-60,355); 
-    anchor=Anchor.centerLeft;
+    size = Vector2(1050, 700); // Adjust size as needed
+    position = Vector2((game.size.x)/3.559,(game.size.x/1.44)/2.649); 
+    anchor=Anchor.center;
+    print (position);
   }
 
   void switchToNight() async {

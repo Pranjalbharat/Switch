@@ -11,7 +11,7 @@ class Background extends SpriteComponent with HasGameRef<SwitchGame> {
     await super.onLoad();
     // Load the image for the Angry Bird sprite
     sprite = await Sprite.load(
-        'background_day.png'); 
+        'backgroundWith_day.png'); 
    
       size = Vector2(game.width,game.height);
     anchor = Anchor.center;
@@ -21,13 +21,13 @@ class Background extends SpriteComponent with HasGameRef<SwitchGame> {
   }
 
   void switchToNight() async {
-    final nightSprite = await Sprite.load('background_night.png');
+    final nightSprite = await Sprite.load('backgroundWith_night.png');
     sprite = nightSprite;
     isNight = true;
   }
 
   void switchToDay() async {
-    final daySprite = await Sprite.load('background_day.png');
+    final daySprite = await Sprite.load('backgroundWith_day.png');
     sprite = daySprite;
     isNight = false;
   }

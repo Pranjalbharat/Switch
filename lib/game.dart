@@ -9,11 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switch_off/Ball/ball.dart';
 import 'package:switch_off/components/background.dart';
-import 'package:switch_off/components/bed.dart';
 import 'package:switch_off/components/borderline.dart';
 import 'package:switch_off/components/bulb.dart';
 import 'package:switch_off/components/config.dart';
-import 'package:switch_off/components/door.dart';
 import 'package:switch_off/components/lamp_right.dart';
 import 'package:switch_off/components/screen.dart';
 import 'package:switch_off/components/lamp_left.dart';
@@ -33,18 +31,18 @@ SwitchGame()
   double get width => size.x;
   double get height => size.y;
 
-  late Bed bed;
+
   late Background background;
   late Screen screen;
   late BorderLine borderline;
-  late Door door;
+
   late Lamp lamp;
   late Lamp2 lamp2;
   late WindowL windowl;
   late WindowR windowr;
   late Bulb bulb;
   late SwitchOn _switch;
-    bool isDay = true;
+  bool isDay = true;
   double timeSinceLastToggle = 0.0;
   double toggleDuration = 5.0;
 
@@ -61,17 +59,9 @@ SwitchGame()
   camera.viewfinder.anchor = Anchor.topLeft;
   background = Background();
   world.add(background);
-  
-
-
-   
-  
     screen = Screen();
     world.add(screen);
-borderline=BorderLine();
-world.add(borderline);
-door=Door();
-world.add(door);
+
 bulb=Bulb();
 world.add(bulb);
 
@@ -87,8 +77,7 @@ world.add(bulb);
  
 
 
-    bed = Bed();
-    world.add(bed);
+  
     _switch=SwitchOn();
     world.add(_switch);
     print(width);
@@ -97,7 +86,6 @@ world.add(bulb);
     ball = Ball();
     world.add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
 
-  
   }
 
   @override
@@ -117,16 +105,14 @@ world.add(bulb);
 
 
   void startDayNightCycle() {
-   
-      bed.toggleDayNight();
+  
+      // bed.toggleDayNight();
       background.toggleDayNight();
-      door.toggleDayNight();
+      // door.toggleDayNight();
       lamp.toggleDayNight();
       lamp2.toggleDayNight();
       windowl.toggleDayNight();
       windowr.toggleDayNight();
- 
-
       bulb.toggleDayNight();
       _switch.toggleDayNight();
   

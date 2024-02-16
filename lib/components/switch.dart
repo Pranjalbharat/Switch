@@ -10,8 +10,8 @@ class SwitchOn extends SpriteComponent with HasGameRef<SwitchGame>{
     await super.onLoad();
     // Load the image for the Angry Bird sprite
     sprite = await Sprite.load('switch_day.png'); // Adjust the path to your image
-    size = Vector2(730,500);// Adjust size as needed
-    position = Vector2(530,260); 
+       size = Vector2(gameRef.size.x,gameRef.size.y); // Adjust size as needed
+    position = Vector2(game.size.x/2,game.size.y/2); 
     anchor=Anchor.center;
   }
 

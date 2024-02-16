@@ -9,8 +9,9 @@ class BorderLine extends SpriteComponent with HasGameRef<SwitchGame>{
     sprite = await Sprite.load('borderline_night.png'); // Adjust the path to your image
     // size = Vector2(300, 300); // Adjust size as needed
     // position = Vector2(200,400); 
-    size = gameRef.size; 
+    // size = Vector2(game.size.x,(game.size.x/(1.44))-(2*(game.size.x/(1.44)))/7.2);
+      size = Vector2(gameRef.size.x,gameRef.size.y);
     anchor=Anchor.center;
-    position = gameRef.size / 2;
+    position = gameRef.size/2 ;
   }
 }

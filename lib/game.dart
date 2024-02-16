@@ -1,6 +1,8 @@
 import 'dart:async';
-import 'dart:html';
+// import 'dart:html';
 
+import 'package:flame/camera.dart';
+import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:switch_off/components/background.dart';
 import 'package:switch_off/components/bed.dart';
 import 'package:switch_off/components/borderline.dart';
 import 'package:switch_off/components/bulb.dart';
+import 'package:switch_off/components/config.dart';
 import 'package:switch_off/components/door.dart';
 import 'package:switch_off/components/lamp_right.dart';
 import 'package:switch_off/components/screen.dart';
@@ -19,6 +22,17 @@ import 'package:switch_off/components/window_left.dart';
 import 'package:switch_off/components/window_right.dart';
 
 class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
+SwitchGame()
+      : super(
+          camera: CameraComponent.withFixedResolution(
+            width: gameWidth,
+            height: gameHeight,
+          ),
+        );
+
+  double get width => size.x;
+  double get height => size.y;
+
   late Bed bed;
   late Background background;
   late Screen screen;
@@ -30,57 +44,80 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
   late WindowR windowr;
   late Bulb bulb;
   late SwitchOn _switch;
+    bool isDay = true;
+  double timeSinceLastToggle = 0.0;
+  double toggleDuration = 5.0;
 
-  //ball
+
+
+
   late Ball ball;
+
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+   
+  camera.viewfinder.anchor = Anchor.topLeft;
+  background = Background();
+  world.add(background);
+  
 
-    background = Background();
-    add(background);
+
+   
+  
     screen = Screen();
-    add(screen);
+    world.add(screen);
 borderline=BorderLine();
-add(borderline);
+world.add(borderline);
 door=Door();
-add(door);
+world.add(door);
 bulb=Bulb();
-add(bulb);
+world.add(bulb);
 
-    bed=Bed();
-  add(bed);
+
   lamp=Lamp();
-  add(lamp);
+  world.add(lamp);
   lamp2=Lamp2();
-  add(lamp2);
+  world.add(lamp2);
   windowl=WindowL();
-  add(windowl);
+  world.add(windowl);
   windowr=WindowR();
-  add(windowr);
+  world.add(windowr);
  
-    borderline = BorderLine();
-    add(borderline);
-    door = Door();
-    add(door);
+
 
     bed = Bed();
-    add(bed);
+    world.add(bed);
     _switch=SwitchOn();
-    add(_switch);
-    
-
-    // startDayNightCycle();
-
-    // add ball
+    world.add(_switch);
+    print(width);
+    print(height);
+  
     ball = Ball();
-    add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
+    world.add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
 
-    startDayNightCycle();
+  
   }
 
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+ 
+    timeSinceLastToggle += dt;
+
+  
+    if (timeSinceLastToggle >= toggleDuration) {
+      startDayNightCycle();
+      timeSinceLastToggle = 0.0; 
+    }
+  }
+
+
+
   void startDayNightCycle() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+   
       bed.toggleDayNight();
       background.toggleDayNight();
       door.toggleDayNight();
@@ -88,12 +125,11 @@ add(bulb);
       lamp2.toggleDayNight();
       windowl.toggleDayNight();
       windowr.toggleDayNight();
-     // Toggle between day and night every 5 seconds
+ 
 
       bulb.toggleDayNight();
       _switch.toggleDayNight();
-      // Toggle between day and night every 5 seconds
-    });
+  
   }
 
   @override
@@ -113,7 +149,7 @@ add(bulb);
     ball.timeY = 0;
     ball.heightY = 0;
     ball.gravity = 10;
-    // Reset other game variables as needed
+   
   }
 
   @override

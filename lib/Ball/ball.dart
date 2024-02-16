@@ -42,9 +42,9 @@ class Ball extends PositionComponent with HasGameRef<SwitchGame> {
     timeY = timeY.abs();
     heightY = ((velocityY / bias) * (velocityY / bias)) / (2 * gravity);
 
-    print("x: $velocityX and y: $velocityY");
-    print("time: $timeY");
-    print("height: $heightY");
+    // print("x: $velocityX and y: $velocityY");
+    // print("time: $timeY");
+    // print("height: $heightY");
   }
 
   @override

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switch_off/Ball/ball.dart';
 import 'package:switch_off/components/background.dart';
-import 'package:switch_off/components/borderline.dart';
 import 'package:switch_off/components/bulb.dart';
 import 'package:switch_off/components/config.dart';
 import 'package:switch_off/components/lamp_right.dart';
@@ -47,7 +46,7 @@ SwitchGame()
 
   late Background background;
   late Screen screen;
-  late BorderLine borderline;
+
 
   late Lamp lamp;
   late Lamp2 lamp2;

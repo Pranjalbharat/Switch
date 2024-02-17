@@ -19,6 +19,19 @@ import 'package:switch_off/components/switch.dart';
 import 'package:switch_off/components/window_left.dart';
 import 'package:switch_off/components/window_right.dart';
 
+
+class GameScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GameWidget(game: SwitchGame())
+    );
+  }
+}
+
+
+
+
 class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
 SwitchGame()
       : super(

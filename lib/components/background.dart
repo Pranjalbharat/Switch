@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:flame/components.dart';
 import 'package:switch_off/game.dart';
 
 class Background extends SpriteComponent with HasGameRef<SwitchGame> {
   bool isNight = false;
-  
   @override
   Future<void> onLoad() async {
     await super.onLoad();

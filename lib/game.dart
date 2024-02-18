@@ -42,12 +42,8 @@ SwitchGame()
 
   double get width => size.x;
   double get height => size.y;
-
-
   late Background background;
   late Screen screen;
-
-
   late Lamp lamp;
   late Lamp2 lamp2;
   late WindowL windowl;
@@ -57,8 +53,8 @@ SwitchGame()
   bool isDay = true;
   double timeSinceLastToggle = 0.0;
   double toggleDuration = 5.0;
-
-
+  double timeSinceLastSwitch=0.0;
+  double switchChange=3.0;
 
 
   late Ball ball;
@@ -71,13 +67,11 @@ SwitchGame()
   camera.viewfinder.anchor = Anchor.topLeft;
   background = Background();
   world.add(background);
-    screen = Screen();
-    world.add(screen);
+    // screen = Screen();
+    // world.add(screen);
 
 bulb=Bulb();
 world.add(bulb);
-
-
   lamp=Lamp();
   world.add(lamp);
   lamp2=Lamp2();
@@ -106,11 +100,17 @@ world.add(bulb);
 
  
     timeSinceLastToggle += dt;
+    timeSinceLastSwitch+=dt;
 
-  
     if (timeSinceLastToggle >= toggleDuration) {
       startDayNightCycle();
+     
       timeSinceLastToggle = 0.0; 
+    }
+    if(timeSinceLastSwitch>=switchChange){
+   _switch.changeSwitchPosition();
+   timeSinceLastSwitch=0.0;
+
     }
   }
 

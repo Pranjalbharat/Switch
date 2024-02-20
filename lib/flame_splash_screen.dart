@@ -1,5 +1,6 @@
 import 'package:flame_splash_screen/flame_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:switch_off/components/overlay_menu.dart';
 import 'package:switch_off/game.dart';
 
 import 'dart:async';

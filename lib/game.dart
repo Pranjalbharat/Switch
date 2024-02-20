@@ -13,21 +13,26 @@ import 'package:switch_off/components/background.dart';
 import 'package:switch_off/components/bulb.dart';
 import 'package:switch_off/components/config.dart';
 import 'package:switch_off/components/lamp_right.dart';
+import 'package:switch_off/components/overlay_menu.dart';
 import 'package:switch_off/components/screen.dart';
 import 'package:switch_off/components/lamp_left.dart';
 import 'package:switch_off/components/switch.dart';
 import 'package:switch_off/components/window_left.dart';
 import 'package:switch_off/components/window_right.dart';
 
+
 class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: GameWidget(game: SwitchGame()));
+    return Scaffold(
+      body: GameWidget(game: SwitchGame(context: context)), // pass context here
+    );
   }
 }
 
 class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
-  SwitchGame()
+  final BuildContext context; 
+  SwitchGame({required this.context})
       : super(
           camera: CameraComponent.withFixedResolution(
             width: gameWidth,
@@ -49,7 +54,13 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
   double timeSinceLastToggle = 0.0;
   double toggleDuration = 5.0;
   double timeSinceLastSwitch = 0.0;
-  double switchChange = 3.0;
+  double switchChange = 20.0;
+  int _score = 0;
+
+void increaseScore() {
+  _score += 10;
+  print('Score: $_score');
+}
 
   late BallSprite ball;
 
@@ -94,10 +105,10 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
       startDayNightCycle();
       timeSinceLastToggle = 0.0;
     }
-    if (timeSinceLastSwitch >= switchChange) {
-      _switch.changeSwitchPosition();
-      timeSinceLastSwitch = 0.0;
-    }
+    // if (timeSinceLastSwitch >= switchChange) {
+    //   _switch.changeSwitchPosition();
+    //   timeSinceLastSwitch = 0.0;
+    // }
   }
 
   void startDayNightCycle() {
@@ -128,7 +139,18 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
     double distance = hitPosition.distanceTo(switchPosition);
     print(distance);
 
-    return distance <= 100;
+      if (distance <= 100) {
+        increaseScore();
+      // Navigate to OverlayMenuPage
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => OverlayMenuPage(score: _score,)),
+      );
+      return true; // You may change this return value according to your needs
+    } else {
+      return false;
+    }
+    // return distance <= 100;
   }
 
   void resetGame() {

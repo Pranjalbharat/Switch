@@ -198,57 +198,72 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CircularButton(
-                    image: AssetImage('menu.png'),
-                    onPressed: () {
-                      // Add onPressed logic for the first button
-                    },
-                  ),
-                  CircularButton(
-                    image: AssetImage('cart.png'),
-                    onPressed: () {
-                      // Add onPressed logic for the second button
-                    },
-                  ),
-                  CircularButton(
-                    image: AssetImage('arrow.png'),
-                    onPressed: () {
-                      // Add onPressed logic for the third button
-                    },
+                  ElevatedButton(onPressed: (){
+                        
+                                     
+                                     
+                                    
+                                       }, child: Image.asset("menu.png"),
+                                    
+                        style: ElevatedButton.styleFrom(
+                         shape: CircleBorder(
+                      
+                          ),
+                          padding: EdgeInsets.all(10),
+                          backgroundColor: Colors.blue,
+                                       ),
+                                      ),
+
+                                      ElevatedButton(onPressed: (){
+                        
+                                     
+                                     
+                                    
+                                       }, child: Image.asset("images/cart.png"),
+                                    
+                        style: ElevatedButton.styleFrom(
+                         shape: CircleBorder(
+                      
+                          ),
+                          padding: EdgeInsets.all(10),
+                          backgroundColor: Colors.blue,
+                                       ),
+                                      ),
+
+
+                                      ElevatedButton(onPressed: (){
+
+                                      },
+                        
+                                     
+                                     
+                                    
+                                        child: Image.asset("arrow.png"),
+                                    
+                        style: ElevatedButton.styleFrom(
+                         shape: CircleBorder(
+                      
+                          ),
+                          padding: EdgeInsets.all(10),
+                          backgroundColor: Colors.blue,
+                                       ),
+                                      ),
+                  
+                  
+
+                ]
+                    ,
                   ),
                 ],
               ),
-            ],
+              
+        )
           ),
-        ),
-      ),
-    );
+        );
+      
+    
   }
 }
 
-class CircularButton extends StatelessWidget {
-  final AssetImage image;
-  final VoidCallback? onPressed;
-
-  const CircularButton({
-    required this.image,
-    this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        shape: CircleBorder(), backgroundColor: Colors.blue,
-        padding: EdgeInsets.all(15.0),
-      ),
-      child: CircleAvatar(
-        radius: 30.0,
-        backgroundImage: image,
-      ),
-    );
-  }
-}
 
 

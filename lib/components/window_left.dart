@@ -14,7 +14,7 @@ class WindowL extends SpriteComponent with HasGameRef<SwitchGame>{
   }
 
   void switchToNight() async {
-    final nightSprite = await Sprite.load('window_left_night.png');
+    final nightSprite = await Sprite.load('window_close_left.png');
     sprite = nightSprite;
     isNight=true;
   

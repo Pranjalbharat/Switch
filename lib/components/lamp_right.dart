@@ -13,27 +13,86 @@ class Lamp2 extends SpriteComponent with HasGameRef<SwitchGame>{
     anchor=Anchor.center;
   }
 
-  void switchToNight() async {
-    final nightSprite = await Sprite.load('lamp_right_night.png');
-    sprite = nightSprite;
-    isNight=true;
+  // void switchToNight() async {
+  //   final nightSprite = await Sprite.load('lamp_night_on.png');
+  //   sprite = nightSprite;
+  //   isNight=true;
   
-  }
+  // }
 
+  //     void switchToLightOffDay() async {
+  //   final nightSprite = await Sprite.load('lamp_day_off.png');
+  //   sprite = nightSprite;
+  //   isNight = true;
+  // }
+
+  //     void switchToLightOnDay() async {
+  //   final nightSprite = await Sprite.load('lamp_day_on.png');
+  //   sprite = nightSprite;
+  //   // isNight = true;
+  // }
+
+  //   void switchToDay() async {
+  //   final daySprite = await Sprite.load('lamp_day_on.png');
+  //   sprite = daySprite;
+  //   isNight = false;
+  
+  // }
+
+  //   void toggleDayNight() {
+  //   if (isNight) {
+  //     switchToDay();
+  //   } else {
+  //     switchToNight();
+  //   }
+  // }
+
+  
       void switchToLightOffDay() async {
     final nightSprite = await Sprite.load('lamp_day_off.png');
     sprite = nightSprite;
-    isNight = true;
+    // isNight = true;
   }
 
-      void switchToLightOnDay() async {
+    void switchToLightOffNight() async {
+    final nightSprite = await Sprite.load('lamp_night_off.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
+    void switchToLightOnDay() async {
     final nightSprite = await Sprite.load('lamp_day_on.png');
     sprite = nightSprite;
     // isNight = true;
   }
 
+    void switchToLightOnNight() async {
+    final nightSprite = await Sprite.load('lamp_night_on.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
+  void switchToNight() async {
+    final nightSprite = await Sprite.load('lamp_night_on.png');
+    sprite = nightSprite;
+    isNight=true;
+  
+  }
+
+  //   void switchToLightOffDay() async {
+  //   final nightSprite = await Sprite.load('lamp_day_off.png');
+  //   sprite = nightSprite;
+  //   // isNight = true;
+  // }
+
+  //     void switchToLightOnDay() async {
+  //   final nightSprite = await Sprite.load('lamp_day_on.png');
+  //   sprite = nightSprite;
+  //   // isNight = true;
+  // }
+
     void switchToDay() async {
-    final daySprite = await Sprite.load('lamp_right.png');
+    final daySprite = await Sprite.load('lamp_day_on.png');
     sprite = daySprite;
     isNight = false;
   
@@ -44,6 +103,22 @@ class Lamp2 extends SpriteComponent with HasGameRef<SwitchGame>{
       switchToDay();
     } else {
       switchToNight();
+    }
+  }
+
+      void toggleLightOff() {
+    if (isNight) {
+      switchToLightOffNight();
+    } else {
+      switchToLightOffDay();
+    }
+  }
+
+  void toggleLightOn() {
+    if (isNight) {
+      switchToLightOnNight();
+    } else {
+      switchToLightOnDay();
     }
   }
 }

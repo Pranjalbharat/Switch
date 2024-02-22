@@ -43,49 +43,82 @@ class SwitchOn extends SpriteComponent with HasGameRef<SwitchGame> {
     position = switchPositions[index];
   }
 
-  void switchToLightOffDay() async {
+  // void switchToLightOffDay() async {
+  //   final nightSprite = await Sprite.load('switch_day_off.png');
+  //   sprite = nightSprite;
+  //   // isNight = true;
+  // }
+
+  //     void switchToLightOnDay() async {
+  //   final nightSprite = await Sprite.load('switch_day_on.png');
+  //   sprite = nightSprite;
+  //   // isNight = true;
+  // }
+
+  // void switchToLightOffNight() async {
+  //     final nightSprite = await Sprite.load('switch_night_off.png');
+  //   sprite = nightSprite;
+  //   // isNight = false;
+  // }
+
+    void switchToLightOffDay() async {
     final nightSprite = await Sprite.load('switch_day_off.png');
     sprite = nightSprite;
-    isNight = true;
+    // isNight = true;
   }
 
-      void switchToLightOnDay() async {
+    void switchToLightOffNight() async {
+    final nightSprite = await Sprite.load('switch_night_off.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
+    void switchToLightOnDay() async {
     final nightSprite = await Sprite.load('switch_day_on.png');
     sprite = nightSprite;
     // isNight = true;
   }
 
-  void switchToLightOffNight() async {
-      final nightSprite = await Sprite.load('switch_night_off.png');
+    void switchToLightOnNight() async {
+    final nightSprite = await Sprite.load('switch_night_on.png');
     sprite = nightSprite;
-    isNight = false;
+    // isNight = true;
   }
 
   void switchToNight() async {
-    final daySprite = await Sprite.load('Switch_night_on.png');
+    final daySprite = await Sprite.load('switch_night_on.png');
     sprite = daySprite; 
+    isNight=true;
   }
 
    void switchToDay() async {
-    final daySprite = await Sprite.load('Switch_day_on.png');
+    final daySprite = await Sprite.load('switch_day_on.png');
     sprite = daySprite;
+    isNight=false;
   }
 
 
   void toggleDayNight() {
-    if (isNight==true) {
+    if (isNight) {
       switchToDay();
     } else {
       switchToNight();
     }
   }
 
-  void toogleLight(){
-    if (isNight==true){
+    void toggleLightOff() {
+    if (isNight) {
       switchToLightOffNight();
-    }
-    else{
+    } else {
       switchToLightOffDay();
+    }
+  }
+
+  void toggleLightOn() {
+    if (isNight) {
+      switchToLightOnNight();
+    } else {
+      switchToLightOnDay();
     }
   }
 }

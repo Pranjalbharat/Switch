@@ -20,20 +20,32 @@ class Bulb extends SpriteComponent with HasGameRef<SwitchGame>{
     // isNight = true;
   }
 
+    void switchToLightOffNight() async {
+    final nightSprite = await Sprite.load('bulb_night_off.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
     void switchToLightOnDay() async {
     final nightSprite = await Sprite.load('bulb_day_on.png');
     sprite = nightSprite;
     // isNight = true;
   }
 
+    void switchToLightOnNight() async {
+    final nightSprite = await Sprite.load('bulb_night_on.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
   void switchToNight() async {
-    final nightSprite = await Sprite.load('bulb_night.png');
+    final nightSprite = await Sprite.load('bulb_night_on.png');
     sprite = nightSprite;
     isNight=true;
   }
 
     void switchToDay() async {
-    final daySprite = await Sprite.load('bulb_day.png');
+    final daySprite = await Sprite.load('bulb_day_on.png');
     sprite = daySprite;
     isNight = false;
   }
@@ -45,6 +57,27 @@ class Bulb extends SpriteComponent with HasGameRef<SwitchGame>{
       switchToNight();
     }
   }
+
+    void toggleLightOff() {
+    if (isNight) {
+      switchToLightOffNight();
+    } else {
+      switchToLightOffDay();
+    }
+  }
+
+   void toggleLightOn() {
+    if (isNight) {
+      switchToLightOnNight();
+    } else {
+      switchToLightOnDay();
+    }
+  }
+  
+  // void switchToLightOnNight() {
+
+  // }
+
 
 
 }

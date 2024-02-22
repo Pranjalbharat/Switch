@@ -139,25 +139,24 @@ for(int i=0;i<=2;i++){
   }
 
   void startDayNightCycle() {
-   
     // bed.toggleDayNight();
     background.toggleDayNight();
     // door.toggleDayNight();
     lamp.toggleDayNight();
     lamp2.toggleDayNight();
-    windowl.toggleDayNight();
-    windowr.toggleDayNight();
+    // windowl.toggleDayNight();
+    // windowr.toggleDayNight();
     bulb.toggleDayNight();
     _switch.toggleDayNight();
-      // print("executed");
   }
 
   void startLightToggle(){
-  _switch.switchToLightOffDay();
-  lamp.switchToLightOffDay();
-  lamp2.switchToLightOffDay();
+  _switch.toggleLightOff();
+  lamp.toggleLightOff();
+  lamp2.toggleLightOff();
   ball.switchToLightOffDay();
-  bulb.switchToLightOffDay();
+  bulb.toggleLightOff();
+  background.toggleLightOff();
   }
 
   @override
@@ -260,11 +259,11 @@ void setvalue(){
     // Reset other game variables as needed
   }
 void callback(){
-  bulb.switchToLightOnDay();
-  _switch.switchToLightOnDay();
-  lamp.switchToLightOnDay();
-  lamp2.switchToLightOnDay();
-
+  bulb.toggleLightOn();
+  _switch.toggleLightOn();
+  lamp.toggleLightOn();
+  lamp2.toggleLightOn();
+  background.toggleLightOn();
 }
 
 

@@ -20,12 +20,13 @@ class BallSprite extends SpriteComponent with HasGameRef<SwitchGame> {
   double heightY = 0;
   double totalTime = 0;
   double bounceTime = 0;
+  bool isNight=false;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    sprite = await gameRef.loadSprite('ball_night.png');
+    sprite = await gameRef.loadSprite('ball_day_on.png');
     position = Vector2((game.size.x / 2) + 50, (game.size.y / 2) + 100);
   }
 
@@ -37,7 +38,6 @@ class BallSprite extends SpriteComponent with HasGameRef<SwitchGame> {
     isThrowed = true;
     velocityX = direction.x * bias;
     velocityY = direction.y * bias;
-
     timeY = (velocityY / bias) / gravity;
     timeY = timeY.abs();
     heightY = ((velocityY / bias) * (velocityY / bias)) / (2 * gravity);
@@ -133,4 +133,18 @@ class BallSprite extends SpriteComponent with HasGameRef<SwitchGame> {
       return;
     }
   }
+
+    void switchToLightOffDay() async {
+    final nightSprite = await Sprite.load('ball_day_off.png');
+    sprite = nightSprite;
+    isNight = true;
+  }
+
+      void switchToLightOnDay() async {
+    final nightSprite = await Sprite.load('ball_day_on.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
+  
 }

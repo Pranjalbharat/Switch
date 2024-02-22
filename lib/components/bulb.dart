@@ -8,10 +8,22 @@ class Bulb extends SpriteComponent with HasGameRef<SwitchGame>{
   Future<void> onLoad() async {
     await super.onLoad();
     // Load the image for the Angry Bird sprite
-    sprite = await Sprite.load('bulb_day.png'); // Adjust the path to your image
-    size = Vector2(gameRef.size.x,gameRef.size.y);// Adjust size as needed
-    position = Vector2((game.size.x/2),(game.size.y/2));  
+    sprite = await Sprite.load('bulb_day_on.png'); // Adjust the path to your image
+    size = Vector2(124,171);// Adjust size as needed
+    position = Vector2((game.size.x/2),(game.size.y/2-500));  
     anchor=Anchor.center;
+  }
+
+  void switchToLightOffDay() async {
+    final nightSprite = await Sprite.load('bulb_day_off.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
+    void switchToLightOnDay() async {
+    final nightSprite = await Sprite.load('bulb_day_on.png');
+    sprite = nightSprite;
+    // isNight = true;
   }
 
   void switchToNight() async {

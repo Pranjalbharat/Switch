@@ -9,6 +9,7 @@ class SwitchOn extends SpriteComponent with HasGameRef<SwitchGame> {
           anchor: Anchor.topLeft,
         );
   bool isNight = false;
+  bool isLight=true;
   late List<Vector2> switchPositions;
   late Random random;
   @override
@@ -16,7 +17,7 @@ class SwitchOn extends SpriteComponent with HasGameRef<SwitchGame> {
     await super.onLoad();
     // Load the image for the Angry Bird sprite
     sprite =
-        await Sprite.load('switch_day.png'); // Adjust the path to your image
+            await Sprite.load('switch_day_on.png'); // Adjust the path to your image
     size = Vector2(148, 148); // Adjust size as needed
     position = Vector2(game.size.x / 2, game.size.y / 2-100);
 
@@ -42,23 +43,49 @@ class SwitchOn extends SpriteComponent with HasGameRef<SwitchGame> {
     position = switchPositions[index];
   }
 
-  void switchToNight() async {
-    final nightSprite = await Sprite.load('switch_night.PNG');
+  void switchToLightOffDay() async {
+    final nightSprite = await Sprite.load('switch_day_off.png');
     sprite = nightSprite;
     isNight = true;
   }
 
-  void switchToDay() async {
-    final daySprite = await Sprite.load('switch_day.png');
-    sprite = daySprite;
+      void switchToLightOnDay() async {
+    final nightSprite = await Sprite.load('switch_day_on.png');
+    sprite = nightSprite;
+    // isNight = true;
+  }
+
+  void switchToLightOffNight() async {
+      final nightSprite = await Sprite.load('switch_night_off.png');
+    sprite = nightSprite;
     isNight = false;
   }
 
+  void switchToNight() async {
+    final daySprite = await Sprite.load('Switch_night_on.png');
+    sprite = daySprite; 
+  }
+
+   void switchToDay() async {
+    final daySprite = await Sprite.load('Switch_day_on.png');
+    sprite = daySprite;
+  }
+
+
   void toggleDayNight() {
-    if (isNight) {
+    if (isNight==true) {
       switchToDay();
     } else {
       switchToNight();
+    }
+  }
+
+  void toogleLight(){
+    if (isNight==true){
+      switchToLightOffNight();
+    }
+    else{
+      switchToLightOffDay();
     }
   }
 }

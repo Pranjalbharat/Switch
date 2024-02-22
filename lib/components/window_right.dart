@@ -7,9 +7,9 @@ class WindowR extends SpriteComponent with HasGameRef<SwitchGame>{
   Future<void> onLoad() async {
     await super.onLoad();
     // Load the image for the Angry Bird sprite
-    sprite = await Sprite.load('window_right.png'); // Adjust the path to your image
-       size = Vector2(gameRef.size.x,gameRef.size.y); // Adjust size as needed
-    position = Vector2(game.size.x/2,game.size.y/2); 
+    sprite = await Sprite.load('window_close_right.png'); // Adjust the path to your image
+       size = Vector2(208,382); // Adjust size as needed
+    position = Vector2(game.size.x/2+970,game.size.y/2-40); 
     anchor=Anchor.center;
   }
 

@@ -19,7 +19,7 @@ class Background extends SpriteComponent with HasGameRef<SwitchGame> {
   }
 
   void switchToNight() async {
-    final nightSprite = await Sprite.load('backgroundWith_night.png');
+    final nightSprite = await Sprite.load('backgroundWith_night_on.png');
     sprite = nightSprite;
     isNight = true;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:switch_off/game.dart';
 
 
 // /*class OverlayMenuPage extends StatefulWidget {
@@ -156,8 +157,9 @@ import 'package:flutter/material.dart';
 
 class OverlayMenuPage extends StatefulWidget {
   final int score;
-
-  OverlayMenuPage({required this.score});
+  // final SwitchGame switchGame; 
+final VoidCallback reset;
+  OverlayMenuPage({required this.score, required this.reset});
 
   @override
   _OverlayMenuPageState createState() => _OverlayMenuPageState();
@@ -223,6 +225,11 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> {
                     image: AssetImage('assets/images/arrow (1).png'),
                     onPressed: () {
                       // Add onPressed logic for the third button
+                      widget.reset;
+                      // print("executed");
+                      // widget.switchGame.resetAllBallsToRed();
+                      // print("done");
+                        Navigator.pop(context);
                     },
                   ),
                 ],

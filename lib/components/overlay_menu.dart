@@ -225,7 +225,7 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> {
                     image: AssetImage('assets/images/arrow (1).png'),
                     onPressed: () {
                       // Add onPressed logic for the third button
-                      widget.reset;
+                      widget.reset();
                       // print("executed");
                       // widget.switchGame.resetAllBallsToRed();
                       // print("done");

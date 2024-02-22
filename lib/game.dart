@@ -126,10 +126,10 @@ for(int i=0;i<=2;i++){
   //   }
 
 
-    print(reset);
+    // print(reset);
     if(reset){
       // print(reset);
-      // startDayNightCycle();
+      startDayNightCycle();
       resetAllBallsToRed();
       reset=false;
     }
@@ -149,7 +149,7 @@ for(int i=0;i<=2;i++){
     windowr.toggleDayNight();
     bulb.toggleDayNight();
     _switch.toggleDayNight();
-      print("executed");
+      // print("executed");
   }
 
   void startLightToggle(){

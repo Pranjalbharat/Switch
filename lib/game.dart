@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switch_off/Ball/ball.dart';
 import 'package:switch_off/Ball/ball_sprite.dart';
+import 'package:switch_off/Cat%20Component/cat.dart';
 import 'package:switch_off/components/background.dart';
 import 'package:switch_off/components/bulb.dart';
 import 'package:switch_off/components/chance_ball.dart';
@@ -20,7 +21,6 @@ import 'package:switch_off/components/switch.dart';
 import 'package:switch_off/components/window_left.dart';
 import 'package:switch_off/components/window_right.dart';
 
-
 class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class GameScreen extends StatelessWidget {
 }
 
 class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
-  final BuildContext context; 
+  final BuildContext context;
   SwitchGame({required this.context})
       : super(
           camera: CameraComponent.withFixedResolution(
@@ -44,28 +44,30 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
   double get height => size.y;
   // late Background background;
   late Screen screen;
-   Lamp lamp=Lamp();
-   Lamp2 lamp2=Lamp2();
-   WindowL windowl=WindowL();
-  WindowR windowr=WindowR();
-   Bulb bulb=Bulb();
-   SwitchOn _switch=SwitchOn();
-   ChanceBall _chanceBall=ChanceBall();
+  late Cat cat;
+
+  Lamp lamp = Lamp();
+  Lamp2 lamp2 = Lamp2();
+  WindowL windowl = WindowL();
+  WindowR windowr = WindowR();
+  Bulb bulb = Bulb();
+  SwitchOn _switch = SwitchOn();
+  ChanceBall _chanceBall = ChanceBall();
   bool isDay = true;
   double timeSinceLastToggle = 0.0;
   double toggleDuration = 5.0;
   double timeSinceLastSwitch = 0.0;
   double switchChange = 20.0;
   int _score = 0;
-  int chancesLeft=3;
+  int chancesLeft = 3;
   List<ChanceBall> chanceBalls = [];
   Background background = Background();
-  bool reset=false;
+  bool reset = false;
 
-void increaseScore() {
-  _score += 10;
-  print('Score: $_score');
-}
+  void increaseScore() {
+    _score += 10;
+    print('Score: $_score');
+  }
 
   late BallSprite ball;
 
@@ -74,17 +76,18 @@ void increaseScore() {
     await super.onLoad();
 
     camera.viewfinder.anchor = Anchor.topLeft;
-   
+
     world.add(background);
     // screen = Screen();
     // world.add(screen);
 
-for(int i=0;i<=2;i++){
-  _chanceBall=ChanceBall();
- world.add(_chanceBall
- ..position=Vector2(size.x/2-1230+(i+1)*110,size.y/2-510));
-  chanceBalls.add(_chanceBall);
-}
+    for (int i = 0; i <= 2; i++) {
+      _chanceBall = ChanceBall();
+      world.add(_chanceBall
+        ..position =
+            Vector2(size.x / 2 - 1230 + (i + 1) * 110, size.y / 2 - 510));
+      chanceBalls.add(_chanceBall);
+    }
     bulb = Bulb();
     world.add(bulb);
     lamp = Lamp();
@@ -97,8 +100,9 @@ for(int i=0;i<=2;i++){
     world.add(windowr);
     _switch = SwitchOn();
     world.add(_switch);
-    print(width);
-    print(height);
+
+    cat = Cat();
+    world.add(cat);
 
     ball = BallSprite();
     world.add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
@@ -120,22 +124,18 @@ for(int i=0;i<=2;i++){
     //   timeSinceLastSwitch = 0.0;
     // }
 // print("running");
-  // void setvalue(){
-  // reset=true;
-  // // print(reset);
-  //   }
-
+    // void setvalue(){
+    // reset=true;
+    // // print(reset);
+    //   }
 
     // print(reset);
-    if(reset){
+    if (reset) {
       // print(reset);
       startDayNightCycle();
       resetAllBallsToRed();
-      reset=false;
+      reset = false;
     }
-
-
-
   }
 
   void startDayNightCycle() {
@@ -150,13 +150,13 @@ for(int i=0;i<=2;i++){
     _switch.toggleDayNight();
   }
 
-  void startLightToggle(){
-  _switch.toggleLightOff();
-  lamp.toggleLightOff();
-  lamp2.toggleLightOff();
-  ball.switchToLightOffDay();
-  bulb.toggleLightOff();
-  background.toggleLightOff();
+  void startLightToggle() {
+    _switch.toggleLightOff();
+    lamp.toggleLightOff();
+    lamp2.toggleLightOff();
+    ball.switchToLightOffDay();
+    bulb.toggleLightOff();
+    background.toggleLightOff();
   }
 
   @override
@@ -175,16 +175,14 @@ for(int i=0;i<=2;i++){
     double distance = hitPosition.distanceTo(switchPosition);
     print(distance);
 
-      if (distance <= 100) {
-        increaseScore();
-        startLightToggle();
-      
+    if (distance <= 100) {
+      increaseScore();
+      startLightToggle();
 
-        Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(Duration(seconds: 3), () {
         callback();
         resetAllBallsToRed();
         _switch.changeSwitchPosition();
-
       });
 
       // Navigate to OverlayMenuPage
@@ -195,35 +193,37 @@ for(int i=0;i<=2;i++){
       return true; // You may change this return value according to your needs
     } else {
       if (chancesLeft > 0) {
-      handleChanceBallAppearance();
-      chancesLeft--; // Decrease the number of chances left
-    }
-    if(chancesLeft==0){
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => OverlayMenuPage(score: _score, reset: setvalue,)),
-      );
-    }
-    return false;
+        handleChanceBallAppearance();
+        chancesLeft--; // Decrease the number of chances left
+      }
+      if (chancesLeft == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => OverlayMenuPage(
+                    score: _score,
+                    reset: setvalue,
+                  )),
+        );
+      }
+      return false;
     }
     // return distance <= 100;
   }
 
-
-void resetAllBallsToRed() {
+  void resetAllBallsToRed() {
     // print("DONE");
-  // Iterate over all ChanceBall instances and reset them to red
-  for (ChanceBall ball in chanceBalls) {
-    ball.resetToRed();
+    // Iterate over all ChanceBall instances and reset them to red
+    for (ChanceBall ball in chanceBalls) {
+      ball.resetToRed();
+    }
+    chancesLeft = 3;
   }
-  chancesLeft=3;
-}
 
-void setvalue(){
-    reset=true;
-  // print(reset);
-}
-
+  void setvalue() {
+    reset = true;
+    // print(reset);
+  }
 
   void resetGame() {
     // ball.position = Vector2((size.x / 2) + 50, (size.y / 2) + 100);
@@ -258,14 +258,14 @@ void setvalue(){
     ball.countBounceTime = false;
     // Reset other game variables as needed
   }
-void callback(){
-  bulb.toggleLightOn();
-  _switch.toggleLightOn();
-  lamp.toggleLightOn();
-  lamp2.toggleLightOn();
-  background.toggleLightOn();
-}
 
+  void callback() {
+    bulb.toggleLightOn();
+    _switch.toggleLightOn();
+    lamp.toggleLightOn();
+    lamp2.toggleLightOn();
+    background.toggleLightOn();
+  }
 
   @override
   KeyEventResult onKeyEvent(
@@ -280,17 +280,18 @@ void callback(){
     }
     return KeyEventResult.ignored;
   }
-  
-  void handleChanceBallAppearance() {
-      if (chancesLeft > 0) {
-    // Find the index of the ChanceBall to change its image
-    int ballIndex = 3 - chancesLeft; // Adjust the index based on the number of chances left
 
-    // Change the sprite image of the ball at the calculated index
-    if (ballIndex >= 0 && ballIndex < chanceBalls.length) {
-      // Change the sprite image of the ball to grey to indicate loss of chance
-      chanceBalls[ballIndex].switchToGrey();
+  void handleChanceBallAppearance() {
+    if (chancesLeft > 0) {
+      // Find the index of the ChanceBall to change its image
+      int ballIndex = 3 -
+          chancesLeft; // Adjust the index based on the number of chances left
+
+      // Change the sprite image of the ball at the calculated index
+      if (ballIndex >= 0 && ballIndex < chanceBalls.length) {
+        // Change the sprite image of the ball to grey to indicate loss of chance
+        chanceBalls[ballIndex].switchToGrey();
+      }
     }
-  }
   }
 }

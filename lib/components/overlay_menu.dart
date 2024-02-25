@@ -165,20 +165,101 @@ final VoidCallback reset;
   _OverlayMenuPageState createState() => _OverlayMenuPageState();
 }
 
-class _OverlayMenuPageState extends State<OverlayMenuPage> {
+class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProviderStateMixin{
+  
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
+  late Future<void> _imageLoading;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _animation = Tween<Offset>(
+      begin: Offset(-1.0, 0.0),
+      end: Offset(13.0, 0.0),
+    ).animate(_controller);
+
+    _imageLoading = _loadImageAndStartAnimation();
+  }
+
+
+
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   _controller.forward();
+    // });
+  
+
+    
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+   Future<void> _loadImageAndStartAnimation() async {
+    await precacheImage(AssetImage("assets/images/overlay.png"), context);
+    _controller.forward();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[100],
-      body: Center(
-        child: Container(
-          
-          padding: EdgeInsets.all(40.0),
-          width: MediaQuery.of(context).size.width * 0.6, // 80% of screen width
-          decoration: BoxDecoration(
-            color: Colors.orange[300],
-            borderRadius: BorderRadius.circular(50.0),
+      
+      
+      
+      body: FutureBuilder(future: _imageLoading,
+       builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Show loading indicator or placeholder widget
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+      
+      
+      else{
+        return
+      Stack(
+        children: [ Positioned.fill(
+                  child: Image.asset(
+                    "assets/images/overlay.png",
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+      
+        
+
+       
+          //Positioned.fill(child: Image.asset("assets/images/overlay.png",fit: BoxFit.fitWidth,),),
+          Positioned(
+            left: 0,
+            top: MediaQuery.of(context).size.height / 2 - 35, // Adjust as needed
+            child: SlideTransition(
+              position: _animation,
+              child: Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/basketball.png"),
+                  ),
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
           ),
+          
+          
+        Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -237,10 +318,33 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> {
             ],
           ),
         ),
-      ),
+
+       /* SlideTransition(position: _animation,
+        child: Container(width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+          image:DecorationImage(image: AssetImage("assets/images/basketball.png")),
+          color: Colors.black,
+          shape: BoxShape.circle
+        ),),)*/
+
+        
+        
+        
+        ],
+
+      );
+      }
+  },
+      )
     );
   }
 }
+
+      
+      
+      
+      
 
 class CircularButton extends StatelessWidget {
   final AssetImage image;
@@ -267,47 +371,70 @@ class CircularButton extends StatelessWidget {
   }
 }
 
-class MainText extends StatelessWidget {
-  final String text;
-  final Color textColor;
-  final double height;
-  final double width;
-
-  const MainText({
-    Key? key,
-    required this.text,
-    required this.textColor,
-    required this.height,
-    required this.width,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.orange.shade300, Colors.red, Colors.orange.shade400],
-        ),
-        borderRadius: BorderRadius.circular(height / 2),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: Offset(0, 2), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(color: textColor, fontSize: 30, fontWeight: FontWeight.bold),
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+
+/*class BallAnimation extends StatefulWidget {
+   //final Alignment alignment;
+
+ // BallAnimation({required this.alignment});
+  @override
+  _BallAnimationState createState() => _BallAnimationState();
+}
+
+class _BallAnimationState extends State<BallAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _animation = Tween<Offset>(
+      begin: Offset(-1.0, 0.0),
+      end: Offset(13.0, 0.0),
+    ).animate(_controller);
+
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _controller.forward();
+    });
+     
+
+    
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+   return SlideTransition(
+      position: _animation,
+      child: Container(
+        width: 90,
+        height: 90,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/images/basketball.png")),
+          color: Colors.black,
+          shape: BoxShape.circle,
         ),
       ),
     );
-  }
-}
+  }*/
+  
+  
+  
+  
+

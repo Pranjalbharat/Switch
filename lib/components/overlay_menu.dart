@@ -1,161 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:switch_off/game.dart';
 
 
-// /*class OverlayMenuPage extends StatefulWidget {
-//   final int score;
-
-//   OverlayMenuPage({required this.score});
-
-//   @override
-//   _OverlayMenuPageState createState() => _OverlayMenuPageState();
-// }
-
-// class _OverlayMenuPageState extends State<OverlayMenuPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-     
-//       /*body: Center(
-//         child: Text(
-//           'Score: ${widget.score}',
-//           style: TextStyle(fontSize: 24),
-//         ),*/
-//       backgroundColor: Colors.red, 
-//       body: Center(
-//         child: Container(
-//           padding: EdgeInsets.all(20.0),
-//           decoration: BoxDecoration(
-//             color: Colors.orange,
-//             borderRadius: BorderRadius.circular(10.0),
-//           ),
-//           child: Column(
-//             //mainAxisSize: MainAxisSize.min,
-//             children: [
-//               Text(
-//                 'Your Score!',
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontSize: 30.0,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               SizedBox(height: 20.0),
-//               Text(
-//           'Score: ${widget.score}',
-          
-//           style: TextStyle(fontSize: 24,color: Colors.yellow),
-        
-                
-//               ),
-//               SizedBox(height: 20.0),
-//               Row(children: [
-               
-//                  CircleAvatar(backgroundImage: AssetImage("menu.png")),
-//                  ),
-//                 SizedBox(width: 20,),
-//                  ElevatedButton(onPressed: (){
-                  
-//                 },
-//                 child: CircleAvatar(backgroundImage: AssetImage("cart.jpg")),),
-//                 SizedBox(width: 20,),
-
-//                  ElevatedButton(onPressed: (){
-                  
-//                 },
-//                 child: CircleAvatar(backgroundImage: AssetImage("arrow.webp")),)
-//               ],)
-//             ],
-//           ),
-//         ),
-//       ),
-//       // ),
-//     );
-//   }
-// }
-// */
-
-// class OverlayMenuPage extends StatefulWidget {
-//   final int score;
-
-//   OverlayMenuPage({required this.score});
-
-//   @override
-//   _OverlayMenuPageState createState() => _OverlayMenuPageState();
-// }
-
-// class _OverlayMenuPageState extends State<OverlayMenuPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.red, 
-//       body: Center(
-//         child: Container(
-//           padding: EdgeInsets.all(20.0),
-//           decoration: BoxDecoration(
-//             color: Colors.orange,
-//             borderRadius: BorderRadius.circular(10.0),
-//           ),
-//           child: Column(
-//             children: [
-//               Text(
-//                 'Your Score!',
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontSize: 30.0,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               SizedBox(height: 20.0),
-//               Text(
-//                 'Score: ${widget.score}',
-//                 style: TextStyle(fontSize: 24, color: Colors.yellow),
-//               ),
-//               SizedBox(height: 20.0),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add onPressed logic for the first circle avatar
-//                     },
-//                     child: CircleAvatar(
-//                       radius: 30.0,
-//                       backgroundImage: AssetImage("menu.png"),
-//                     ),
-//                   ),
-//                   SizedBox(width: 20.0),
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add onPressed logic for the second circle avatar
-//                     },
-//                     child: CircleAvatar(
-//                       radius: 30.0,
-//                       backgroundImage: AssetImage("cart.png"),
-//                     ),
-//                   ),
-//                   SizedBox(width: 20.0),
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add onPressed logic for the third circle avatar
-//                     },
-//                     child: CircleAvatar(
-//                       radius: 30.0,
-//                       backgroundImage: AssetImage("arrow.png"),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 
 class OverlayMenuPage extends StatefulWidget {
+
+  
   final int score;
   // final SwitchGame switchGame; 
 final VoidCallback reset;
@@ -165,50 +18,126 @@ final VoidCallback reset;
   _OverlayMenuPageState createState() => _OverlayMenuPageState();
 }
 
-class _OverlayMenuPageState extends State<OverlayMenuPage> {
+class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProviderStateMixin{
+  
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
+  late Future<void> _imageLoading;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _animation = Tween<Offset>(
+      begin: Offset(-1.0, 0.0),
+      end: Offset(13.0, 0.0),
+    ).animate(_controller);
+
+    _imageLoading = _loadImageAndStartAnimation();
+  }
+
+
+
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   _controller.forward();
+    // });
+  
+
+    
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+   Future<void> _loadImageAndStartAnimation() async {
+    await precacheImage(AssetImage("assets/images/overlay.png"), context);
+    _controller.forward();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[100],
-      body: Center(
-        child: Container(
-          
-          padding: EdgeInsets.all(40.0),
-          width: MediaQuery.of(context).size.width * 0.6, // 80% of screen width
-          decoration: BoxDecoration(
-            color: Colors.orange[300],
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            
-            children: [
-              MainText(
-                text:
-                'Your Score',
-                 //backgroundColor: Colors.red, // Background color of the bow
-            textColor: Colors.white, // Text color
-            height: 80, // Adjust the height of the bow shape
-            width: 1000,
-                /*style: TextStyle(
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red
-                ),*/
+      
+      
+      
+      body: FutureBuilder(future: _imageLoading,
+       builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Show loading indicator or placeholder widget
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+      
+      
+      else{
+        return
+      Stack(
+        children: [ Positioned.fill(
+                  child: Image.asset(
+                    "assets/images/overlay.png",
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+      
+        
+
+       
+          //Positioned.fill(child: Image.asset("assets/images/overlay.png",fit: BoxFit.fitWidth,),),
+          Positioned(
+            left: 0,
+            top: MediaQuery.of(context).size.height / 2 - 35, // Adjust as needed
+            child: SlideTransition(
+              position: _animation,
+              child: Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/basketball.png"),
+                  ),
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
               ),
+            ),
+          ),
+          
+          
+        Center(
+          child: Column(
+
+            children: [
+              SizedBox(height: 75,),
+              Text("Your Score",style: TextStyle(
+                color: Colors.red,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),),
+
               SizedBox(height: 20.0),
               Text(
                 'Score: ${widget.score}',
                 style: TextStyle(
                   fontSize: 27.0,
-                  color:Colors.red[700] 
+                  color:Colors.red[200]
                 ),
               ),
+
               SizedBox(height: 40.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  SizedBox(width: 250,),
                   CircularButton(
                     image: AssetImage('assets/images/menu.png'),
                     onPressed: () {
@@ -216,13 +145,13 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> {
                     },
                   ),
                   CircularButton(
-                    image: AssetImage('assets/images/cart.png'),
+                    image: AssetImage('assets/images/shopping.png'),
                     onPressed: () {
                       // Add onPressed logic for the second button
                     },
                   ),
                   CircularButton(
-                    image: AssetImage('assets/images/arrow (1).png'),
+                    image: AssetImage('assets/images/refresh.png'),
                     onPressed: () {
                       // Add onPressed logic for the third button
                       widget.reset();
@@ -234,13 +163,39 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> {
                   ),
                 ],
               ),
+              
             ],
+
+
           ),
         ),
-      ),
+
+       /* SlideTransition(position: _animation,
+        child: Container(width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+          image:DecorationImage(image: AssetImage("assets/images/basketball.png")),
+          color: Colors.black,
+          shape: BoxShape.circle
+        ),),)*/
+
+        
+        
+        
+        ],
+
+      );
+      }
+  },
+      )
     );
   }
 }
+
+      
+      
+      
+      
 
 class CircularButton extends StatelessWidget {
   final AssetImage image;
@@ -256,8 +211,9 @@ class CircularButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        shape: CircleBorder(), backgroundColor: Colors.yellow[900],
-        padding: EdgeInsets.all(15.0),
+        shape: 
+        CircleBorder(), backgroundColor: Colors.black,
+        //padding: EdgeInsets.all(7.0),
       ),
       child: CircleAvatar(
         radius: 40.0,
@@ -267,47 +223,70 @@ class CircularButton extends StatelessWidget {
   }
 }
 
-class MainText extends StatelessWidget {
-  final String text;
-  final Color textColor;
-  final double height;
-  final double width;
-
-  const MainText({
-    Key? key,
-    required this.text,
-    required this.textColor,
-    required this.height,
-    required this.width,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.orange.shade300, Colors.red, Colors.orange.shade400],
-        ),
-        borderRadius: BorderRadius.circular(height / 2),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: Offset(0, 2), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(color: textColor, fontSize: 30, fontWeight: FontWeight.bold),
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+
+/*class BallAnimation extends StatefulWidget {
+   //final Alignment alignment;
+
+ // BallAnimation({required this.alignment});
+  @override
+  _BallAnimationState createState() => _BallAnimationState();
+}
+
+class _BallAnimationState extends State<BallAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+
+    _animation = Tween<Offset>(
+      begin: Offset(-1.0, 0.0),
+      end: Offset(13.0, 0.0),
+    ).animate(_controller);
+
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _controller.forward();
+    });
+     
+
+    
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+   return SlideTransition(
+      position: _animation,
+      child: Container(
+        width: 90,
+        height: 90,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/images/basketball.png")),
+          color: Colors.black,
+          shape: BoxShape.circle,
         ),
       ),
     );
-  }
-}
+  }*/
+  
+  
+  
+  
+

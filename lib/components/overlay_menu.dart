@@ -2,160 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:switch_off/game.dart';
 
 
-// /*class OverlayMenuPage extends StatefulWidget {
-//   final int score;
+import 'dart:math';
 
-//   OverlayMenuPage({required this.score});
+import 'package:flutter/material.dart';
+import 'package:switch_off/game.dart';
 
-//   @override
-//   _OverlayMenuPageState createState() => _OverlayMenuPageState();
-// }
 
-// class _OverlayMenuPageState extends State<OverlayMenuPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-     
-//       /*body: Center(
-//         child: Text(
-//           'Score: ${widget.score}',
-//           style: TextStyle(fontSize: 24),
-//         ),*/
-//       backgroundColor: Colors.red, 
-//       body: Center(
-//         child: Container(
-//           padding: EdgeInsets.all(20.0),
-//           decoration: BoxDecoration(
-//             color: Colors.orange,
-//             borderRadius: BorderRadius.circular(10.0),
-//           ),
-//           child: Column(
-//             //mainAxisSize: MainAxisSize.min,
-//             children: [
-//               Text(
-//                 'Your Score!',
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontSize: 30.0,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               SizedBox(height: 20.0),
-//               Text(
-//           'Score: ${widget.score}',
-          
-//           style: TextStyle(fontSize: 24,color: Colors.yellow),
-        
-                
-//               ),
-//               SizedBox(height: 20.0),
-//               Row(children: [
-               
-//                  CircleAvatar(backgroundImage: AssetImage("menu.png")),
-//                  ),
-//                 SizedBox(width: 20,),
-//                  ElevatedButton(onPressed: (){
-                  
-//                 },
-//                 child: CircleAvatar(backgroundImage: AssetImage("cart.jpg")),),
-//                 SizedBox(width: 20,),
-
-//                  ElevatedButton(onPressed: (){
-                  
-//                 },
-//                 child: CircleAvatar(backgroundImage: AssetImage("arrow.webp")),)
-//               ],)
-//             ],
-//           ),
-//         ),
-//       ),
-//       // ),
-//     );
-//   }
-// }
-// */
-
-// class OverlayMenuPage extends StatefulWidget {
-//   final int score;
-
-//   OverlayMenuPage({required this.score});
-
-//   @override
-//   _OverlayMenuPageState createState() => _OverlayMenuPageState();
-// }
-
-// class _OverlayMenuPageState extends State<OverlayMenuPage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.red, 
-//       body: Center(
-//         child: Container(
-//           padding: EdgeInsets.all(20.0),
-//           decoration: BoxDecoration(
-//             color: Colors.orange,
-//             borderRadius: BorderRadius.circular(10.0),
-//           ),
-//           child: Column(
-//             children: [
-//               Text(
-//                 'Your Score!',
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontSize: 30.0,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               SizedBox(height: 20.0),
-//               Text(
-//                 'Score: ${widget.score}',
-//                 style: TextStyle(fontSize: 24, color: Colors.yellow),
-//               ),
-//               SizedBox(height: 20.0),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add onPressed logic for the first circle avatar
-//                     },
-//                     child: CircleAvatar(
-//                       radius: 30.0,
-//                       backgroundImage: AssetImage("menu.png"),
-//                     ),
-//                   ),
-//                   SizedBox(width: 20.0),
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add onPressed logic for the second circle avatar
-//                     },
-//                     child: CircleAvatar(
-//                       radius: 30.0,
-//                       backgroundImage: AssetImage("cart.png"),
-//                     ),
-//                   ),
-//                   SizedBox(width: 20.0),
-//                   ElevatedButton(
-//                     onPressed: () {
-//                       // Add onPressed logic for the third circle avatar
-//                     },
-//                     child: CircleAvatar(
-//                       radius: 30.0,
-//                       backgroundImage: AssetImage("arrow.png"),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 
 class OverlayMenuPage extends StatefulWidget {
+
+  
   final int score;
   // final SwitchGame switchGame; 
 final VoidCallback reset;
@@ -189,9 +46,9 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProv
 
 
 
-    // WidgetsBinding.instance!.addPostFrameCallback((_) {
-    //   _controller.forward();
-    // });
+    //  WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //    _controller.forward();
+    //  });
   
 
     
@@ -201,10 +58,10 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProv
     super.dispose();
   }
 
-   Future<void> _loadImageAndStartAnimation() async {
-    await precacheImage(AssetImage("assets/images/overlay.png"), context);
-    _controller.forward();
-  }
+    Future<void> _loadImageAndStartAnimation() async {
+     await precacheImage(AssetImage("assets/images/overlay.png"), context);
+     _controller.forward();
+   }
 
 
 
@@ -261,35 +118,30 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProv
           
         Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            
+
             children: [
-              MainText(
-                text:
-                'Your Score',
-                 //backgroundColor: Colors.red, // Background color of the bow
-            textColor: Colors.white, // Text color
-            height: 80, // Adjust the height of the bow shape
-            width: 1000,
-                /*style: TextStyle(
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red
-                ),*/
-              ),
+              SizedBox(height: 75,),
+              Text("Your Score",style: TextStyle(
+                color: Colors.red,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),),
+
               SizedBox(height: 20.0),
               Text(
                 'Score: ${widget.score}',
                 style: TextStyle(
                   fontSize: 27.0,
-                  color:Colors.red[700] 
+                  color:Colors.red[200]
                 ),
               ),
+
               SizedBox(height: 40.0),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  SizedBox(width: 250,),
                   CircularButton(
                     image: AssetImage('assets/images/menu.png'),
                     onPressed: () {
@@ -297,13 +149,13 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProv
                     },
                   ),
                   CircularButton(
-                    image: AssetImage('assets/images/cart.png'),
+                    image: AssetImage('assets/images/shopping.png'),
                     onPressed: () {
                       // Add onPressed logic for the second button
                     },
                   ),
                   CircularButton(
-                    image: AssetImage('assets/images/arrow (1).png'),
+                    image: AssetImage('assets/images/refresh.png'),
                     onPressed: () {
                       // Add onPressed logic for the third button
                       widget.reset();
@@ -315,7 +167,10 @@ class _OverlayMenuPageState extends State<OverlayMenuPage> with SingleTickerProv
                   ),
                 ],
               ),
+              
             ],
+
+
           ),
         ),
 
@@ -360,8 +215,9 @@ class CircularButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        shape: CircleBorder(), backgroundColor: Colors.yellow[900],
-        padding: EdgeInsets.all(15.0),
+        shape: 
+        CircleBorder(), backgroundColor: Colors.black,
+        //padding: EdgeInsets.all(7.0),
       ),
       child: CircleAvatar(
         radius: 40.0,
@@ -437,4 +293,3 @@ class _BallAnimationState extends State<BallAnimation>
   
   
   
-

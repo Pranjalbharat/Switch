@@ -4,6 +4,7 @@ import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:switch_off/Ball/ball.dart';
@@ -106,6 +107,7 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
 
     ball = BallSprite();
     world.add(ball..position = Vector2((size.x / 2) + 50, (size.y / 2) + 100));
+    await FlameAudio.audioCache.loadAll(['dribble.mp3', 'switch.mp3']);
   }
 
   @override
@@ -178,6 +180,7 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
     if (distance <= 100) {
       increaseScore();
       startLightToggle();
+      FlameAudio.play('switch.mp3');
 
       Future.delayed(Duration(seconds: 3), () {
         callback();
@@ -192,6 +195,7 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
       // );
       return true; // You may change this return value according to your needs
     } else {
+      FlameAudio.playLongAudio('dribble3.mp3');
       if (chancesLeft > 0) {
         handleChanceBallAppearance();
         chancesLeft--; // Decrease the number of chances left
@@ -269,7 +273,8 @@ class SwitchGame extends FlameGame with PanDetector, KeyboardEvents {
 
   @override
   KeyEventResult onKeyEvent(
-    RawKeyEvent event,
+   // ignore: deprecated_member_use
+    KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
     final isR = keysPressed.contains(LogicalKeyboardKey.keyR);
